@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title>Hack Demo - Business Admin</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div style="margin:100px;">
+    <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">AngelHack</a>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Sitemap</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+      <h1>Welcome, Mark!</h1>
+      <p>Enter the following details to publish the promotion</p>
+
+      <div class="form-group">
+    <label for="usr">Promo Name:</label>
+    <input type="text" class="form-control" id="usr">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Image</label>
+    <input type="file" class="form-control" id="img">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Promocode</label>
+    <input type="text" class="form-control" id="pmcd">
+  </div>
+  <div class="form-group">
+    <label for="sel1">Select Trigger Threshold</label>
+    <select class="form-control" id="sel1">
+      <option>5</option>
+      <option>8</option>
+      <option>12</option>
+      <option>15</option>
+    </select>
+  </div>
+
+
+      <p><a class="btn btn-primary btn-lg" href="#" role="button" onclick="javascript:alert('Promotion Activated');">Publish</a></p>
+    </div>
+  </div>
+</body>
+</html>
