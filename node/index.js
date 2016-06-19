@@ -38,6 +38,7 @@ app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
 
+//FaceBook Messenger - ChatBot - WebHook
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
@@ -51,18 +52,18 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-//
+// Get the Address Details from the LatLng details of the Customer.
 app.get('/getreversegeocode/', function (req, res) {
 var lat = -38.750;
 var lon=150.950;
+
 if(req.query.lat != null)
  lat = req.query.lat;
 
 if(req.query.lon != null)
  lon = req.query.lon;
 
-
-
+//Key to be masked and added in env vairable
   request({
       url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+'&key=AIzaSyAGVyPnzUphJcgYq7JnecDNsPfODGd-9cM',
       method: 'GET',
@@ -105,7 +106,8 @@ if(req.query.lon != null)
           console.log('Error: ', response.body.error)
       }
       else {
-//Mocked up the data here. To be calling the Google Places API for the near by attractions
+//Mocked up the data here. The core service resides here which would do the heavy lifting of talking to multiple API and mash up the response, To call the Google Places API to fetch near by attractions & business tagged to the organisation
+
       res.json([{"Subscription":"Restaurant","Name":"Sepia Restaurant","url":"https://www.sepiarestaurant.com.au/","Distance":"260.m","Address":"201,Sussex Street","HeatIndex":response.body.substring(8,response.body.length-1),"Current Status":"Active","PromotionCode":"OPTUS21RE4","ImageURL":"http://32nx081gxf2a22tnp739vhey.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/image2.jpeg","PromoDesc":"Avail 20% off"},{"Subscription":"Bar","Name":"Baxter Inn","url":"https://www.baxterinn.com.au/","Distance":"240.m","Address":"152 Clarence St.","HeatIndex":response.body.substring(8,response.body.length-1),"Current Status":"Active","PromotionCode":"OPTUS21BR4","ImageURL":"https://img.zmtcdn.com/data/pictures/1/16558191/d24825996f0d060bd3be3b83206bbaf7.jpg","PromoDesc":"Avail 50% off"},{"Subscription":"Shopping","Name":"Westfield Shopping","url":"https://www.westfield.com.au/","Distance":"230.m","Address":"188,Pitt Street","HeatIndex":response.body.substring(8,response.body.length-1),"Current Status":"Active","PromotionCode":"OPTUS21SH4","ImageURL":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/New_Westfield_shopping_centre,_Sydney_CBD.jpg/1024px-New_Westfield_shopping_centre,_Sydney_CBD.jpg","PromoDesc":"Avail 20% off at David Jones"}]);
 
 
@@ -114,10 +116,12 @@ if(req.query.lon != null)
 });
 });
 
-
+//Key to be masked and added in env vairable
 const token = "EAAYY42WhGn0BAOI7Bjp4UkHCREOu2RrZCtyoe4g8WGkdnlBZAcNUZBiBxRGwPrKCE2sQK0TLbKYZCu883bJeKb1JjXIR0Mp9HLa71fHPphm1X0wDTOaWHVqR5uzDKgRP11Dd8NNOvujw5lsoZBaX1fwLK8mLnAgnvywofcIW7ggZDZD"
+
+
 function sendTextMessage(sender, text) {
-//
+// This method talks to the facebook messenger.
    let messageData = externalAPICall(sender,text)
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -138,7 +142,7 @@ function sendTextMessage(sender, text) {
 
 function externalAPICall(sender,text)
 {
-
+//This functionality is to be ideally replaced by cognitive analytical services. For the demo its been mocked up today.
   if (text.toLowerCase().indexOf("hello") > -1)
   {
     return { text:'Hello,how can i help you today' };
@@ -161,6 +165,8 @@ function externalAPICall(sender,text)
 
 return object with less Weight
 */
+
+//Below is a sample response
     return { text:'Go for '+ text.substring(3, text.toLowerCase().indexOf("crowded or")) };
 }
 
